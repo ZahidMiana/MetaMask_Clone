@@ -5,7 +5,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment variables
-.env
 chromeapi/config.env
 
 # OS generated files
@@ -18,7 +17,6 @@ ehthumbs.db
 Thumbs.db
 
 # IDE files
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -43,3 +41,4 @@ build/
 # Temporary files
 tmp/
 temp/
+config.bat
