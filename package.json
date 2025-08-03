@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "nodemon server.js",
+    "dev": "node init && next dev",
+    "build": "node init && next build",
+    "start": "node init && nodemon server.js",
     "lint": "next lint"
   },
   "dependencies": {
