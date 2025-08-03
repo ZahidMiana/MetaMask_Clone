@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Test Guide</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .test-section { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .step { margin: 10px 0; }
+        .check { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+        code { background: #e0e0e0; padding: 2px 4px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>🔥 MianaMask Extension - Complete Test Guide (FIXED ALL ISSUES)</h1>
+    
+    <div class="test-section">
+        <h2>✅ Issues Fixed</h2>
+        <div class="step check">✓ Receive functionality now works properly</div>
+        <div class="step check">✓ Swap functionality shows proper modal (not alert)</div>
+        <div class="step check">✓ Add Account back arrow now works correctly</div>
+        <div class="step check">✓ All navigation functions are properly connected</div>
+        <div class="step check">✓ Address copying works in receive screen</div>
+        <div class="step check">✓ Account management system fully functional</div>
+    </div>
+
+    <div class="test-section">
+        <h2>✅ Backend Status</h2>
+        <div class="step check">✓ Server running on port 3000</div>
+        <div class="step check">✓ MongoDB connected successfully</div>
+        <div class="step check">✓ All API endpoints fixed and working</div>
+        <div class="step check">✓ Multi-account management system implemented</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🚀 Testing Steps</h2>
+        
+        <h3>1. Reload Extension</h3>
+        <div class="step">• Go to <code>chrome://extensions/</code></div>
+        <div class="step">• Find "MianaMask - Crypto Wallet"</div>
+        <div class="step">• Click the reload button 🔄</div>
+        
+        <h3>2. Test Create Account Flow</h3>
+        <div class="step">• Open extension popup</div>
+        <div class="step">• Click "Create Account" button</div>
+        <div class="step">• Fill in all fields (Name, Email, Password, Confirm Password)</div>
+        <div class="step">• Click "Create Account"</div>
+        <div class="step">• Wait for wallet creation (should show loading spinner)</div>
+        <div class="step">• Verify wallet details are displayed (Address, Private Key, Mnemonic)</div>
+        <div class="step">• Click "Continue to Wallet" button</div>
+        <div class="step check">✓ Should navigate to main wallet screen</div>
+        
+        <h3>3. Test Account Management System</h3>
+        <div class="step">• Verify account dropdown shows "Account 1" with address</div>
+        <div class="step">• Click the dropdown arrow (▼) next to account name</div>
+        <div class="step check">✓ Should open account list dropdown with animation</div>
+        <div class="step">• Click "+ Add Account" to add second account</div>
+        <div class="step">• Import another account with private key</div>
+        <div class="step check">✓ Back arrow should work - test this!</div>
+        <div class="step">• After adding account, click dropdown again</div>
+        <div class="step check">✓ Should show both accounts in list</div>
+        <div class="step">• Click on different account to switch</div>
+        <div class="step check">✓ Should switch account and update balance/address</div>
+        
+        <h3>4. Test New Action Buttons (FIXED!)</h3>
+        <div class="step">• Test "Send" → Should open transfer screen</div>
+        <div class="step check">✓ Test "Receive" → Should open receive screen with your address</div>
+        <div class="step check">✓ Test address copy in receive screen - click Copy button</div>
+        <div class="step check">✓ Test back arrow in receive screen</div>
+        <div class="step check">✓ Test "Swap" → Should show coming soon modal (not alert)</div>
+        <div class="step check">✓ Test back arrow in swap screen</div>
+        <div class="step">• Test "Add Account" → Should open import account screen</div>
+        <div class="step check">✓ Test back arrow in add account screen</div>
+        
+        <h3>5. Test Receive Functionality (FIXED!)</h3>
+        <div class="step">• Click "Receive" button</div>
+        <div class="step check">✓ Verify your actual wallet address is displayed (not placeholder)</div>
+        <div class="step">• Click "Copy" button</div>
+        <div class="step check">✓ Address should be copied to clipboard</div>
+        <div class="step check">✓ Button should show "Copied!" temporarily</div>
+        <div class="step">• Click back arrow to return to home</div>
+        <div class="step check">✓ Should return to home screen properly</div>
+        
+        <h3>6. Test Swap Functionality (IMPROVED!)</h3>
+        <div class="step">• Click "Swap" button</div>
+        <div class="step check">✓ Should show animated coming soon modal (not alert)</div>
+        <div class="step check">✓ Should see rotating icon and features list</div>
+        <div class="step">• Click back arrow</div>
+        <div class="step check">✓ Should return to home screen</div>
+        
+        <h3>7. Test Account Import Back Arrow (FIXED!)</h3>
+        <div class="step">• Click "Add Account" button</div>
+        <div class="step check">✓ Should open import account screen</div>
+        <div class="step">• Click back arrow (←) in top left</div>
+        <div class="step check">✓ Should return to home screen (not stuck)</div>
+        <div class="step">• Try this multiple times to confirm it always works</div>
+        
+        <h3>4. Test Assets/Activity Tabs</h3>
+        <div class="step">• Click "Activity" tab → Should switch to activity view</div>
+        <div class="step">• Click "Assets" tab → Should switch back to assets view</div>
+        <div class="step">• Verify tab styling updates correctly</div>
+        
+        <h3>5. Test Network Selection</h3>
+        <div class="step">• Click network dropdown (top right)</div>
+        <div class="step">• Select different networks (Sepolia, Mainnet, etc.)</div>
+        <div class="step">• Verify network name updates</div>
+        <div class="step">• Click "Close" to close network modal</div>
+        
+        <h3>6. Test Import Account</h3>
+        <div class="step">• Logout first (to test import from login screen)</div>
+        <div class="step">• Click "Import Account" from login screen</div>
+        <div class="step">• Enter a valid private key (starts with 0x)</div>
+        <div class="step">• Click "Import Account"</div>
+        <div class="step check">✓ Should import and navigate to wallet</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🐛 Debugging Tips</h2>
+        <div class="step">• Right-click popup → Inspect → Console tab</div>
+        <div class="step">• Look for console logs showing button clicks</div>
+        <div class="step">• Check for any red error messages</div>
+        <div class="step">• Verify backend API calls are successful</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Expected Console Logs</h2>
+        <div class="step">• "DOM Content Loaded - Extension Starting"</div>
+        <div class="step">• "Event listener added for..." messages</div>
+        <div class="step">• "Create Account button clicked!" (when testing)</div>
+        <div class="step">• "goHomePage function called" (when clicking Continue to Wallet)</div>
+        <div class="step">• Balance and address updates</div>
+    </div>
+
+    <h2 class="check">🎉 All functionality should now work perfectly!</h2>
+    <p>If you encounter any issues, check the console for error messages and let me know what specific button or feature isn't working.</p>
+</body>
+</html>

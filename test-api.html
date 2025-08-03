@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Test Create Account API</h1>
+    <button onclick="testCreateAccount()">Test Create Account</button>
+    <div id="result"></div>
+
+    <script src="ethers.js"></script>
+    <script>
+        async function testCreateAccount() {
+            try {
+                const wallet = ethers.Wallet.createRandom();
+                
+                const data = {
+                    name: "Test User",
+                    email: "test@test.com",
+                    password: "12345678",
+                    passwordConfirm: "12345678",
+                    address: wallet.address,
+                    private_key: wallet.privateKey,
+                    mnemonic: wallet.mnemonic.phrase,
+                };
+
+                const response = await fetch('http://localhost:3000/api/v1/user/signup', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+                
+                if (response.ok) {
+                    alert('Account created successfully!');
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

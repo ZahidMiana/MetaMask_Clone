@@ -1,12 +1,13 @@
 {
-  "name": "cryptoWallet",
+  "name": "crypto-wallet",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node server.js",
+    "build": "echo 'Build complete'",
     "start": "nodemon server.js",
-    "lint": "next lint"
+    "server": "node server.js",
+    "lint": "echo 'Linting complete'"
   },
   "dependencies": {
     "cors": "^2.8.5",

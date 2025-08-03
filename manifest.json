@@ -1,0 +1,43 @@
+{
+    "manifest_version": 3,
+    "name": "MianaMask - Crypto Wallet",
+    "version": "1.0.0",
+    "description": "A MetaMask clone - Ethereum wallet and gateway to blockchain apps",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "http://localhost:3000/*",
+        "https://*/*"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "MianaMask Wallet",
+        "default_icon": {
+            "16": "assets/theblockchaincoders.png",
+            "48": "assets/theblockchaincoders.png",
+            "128": "assets/theblockchaincoders.png"
+        }
+    },
+    "icons": {
+        "16": "assets/theblockchaincoders.png",
+        "48": "assets/theblockchaincoders.png",
+        "128": "assets/theblockchaincoders.png"
+    },
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "assets/*",
+                "*.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}

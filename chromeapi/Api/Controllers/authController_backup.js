@@ -1,7 +1,26 @@
 const jwt = require("jsonwebtoken");
 const User = require("../Model/userModel");
-const Account = require("../Model/accountModel");
+const Accounexports.allToken = async (req, res, next) => {
+    try {
+        const tokens = await Token.find();
+
+        res.status(200).json({
+            status: "success",
+            results: tokens.length,
+            data: {
+                tokens,
+            },
+        });
+    } catch (error) {
+        console.error("Get tokens error:", error);
+        res.status(400).json({
+            status: "fail",
+            message: error.message,
+        });
+    }
+}; ("../Model/accountModel");
 const Token = require("../Model/tokenModel");
+
 
 const signToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -9,12 +28,13 @@ const signToken = (id) => {
     });
 };
 
+
 //createSend Token function to send the token in response
 const createSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id);
 
     res.cookie("jwt", token, {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
         httpOnly: true,
         secure: req.secure || req.headers["x-forwarded-proto"] === "https",
     });
@@ -30,6 +50,7 @@ const createSendToken = (user, statusCode, req, res) => {
         },
     });
 };
+
 
 exports.signup = async (req, res, next) => {
     try {
@@ -52,6 +73,8 @@ exports.signup = async (req, res, next) => {
         });
     }
 };
+
+
 
 exports.login = async (req, res, next) => {
     try {
@@ -87,86 +110,63 @@ exports.login = async (req, res, next) => {
 };
 
 exports.allToken = async (req, res, next) => {
-    try {
-        const tokens = await Token.find();
+    const tokens = await Token.find();
 
-        res.status(200).json({
-            status: "success",
-            results: tokens.length,
-            data: {
-                tokens,
-            },
-        });
-    } catch (error) {
-        console.error("Get tokens error:", error);
-        res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
-};
+    res.status(200).json({
+        status: "success",
+        results: tokens.length,
+        data: {
+            tokens,
+        },
+    });
+}
+
 
 exports.addToken = async (req, res, next) => {
-    try {
-        const newToken = await Token.create({
-            name: req.body.name,
-            address: req.body.address,
-            symbol: req.body.symbol,
-        });
+    const newToken = await Token.create({
+        name: req.body.name,
+        address: req.body.address,
+        symbol: req.body.symbol,
+    });
 
-        res.status(201).json({
-            status: "success",
-            data: {
-                token: newToken,
-            },
-        });
-    } catch (error) {
-        console.error("Add token error:", error);
-        res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
+    res.status(201).json({
+        status: "success",
+        data: {
+            token: newToken,
+        },
+    });
 };
+
+
 
 exports.allAccount = async (req, res, next) => {
-    try {
-        const accounts = await Account.find();
+    const accounts = await Account.find();
 
-        res.status(200).json({
-            status: "success",
-            results: accounts.length,
-            data: {
-                accounts,
-            },
-        });
-    } catch (error) {
-        console.error("Get accounts error:", error);
-        res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
+    res.status(200).json({
+        status: "success",
+        results: accounts.length,
+        data: {
+            accounts,
+        },
+    });
 };
+
+
 
 exports.createAccount = async (req, res, next) => {
-    try {
-        const newAccount = await Account.create({
-            privateKey: req.body.private_key,
-            address: req.body.address,
-        });
+    const newAccount = await Account.create({
+        privateKey: req.body.private_key,
+        address: req.body.address,
+    });
 
-        res.status(201).json({
-            status: "success",
-            data: {
-                account: newAccount,
-            },
-        });
-    } catch (error) {
-        console.error("Create account error:", error);
-        res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
+    res.status(201).json({
+        status: "success",
+        data: {
+            account: newAccount,
+        },
+    });
 };
+
+
+
+

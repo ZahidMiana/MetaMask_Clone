@@ -2,8 +2,328 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@theblockchaincoders</title>
+    <meta name="viewport" content="width=357, height=600, initial-scale=1.0, user-scalable=no" />
+    <title>MianaMask - Crypto Wallet</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      html, body {
+        width: 357px !important;
+        height: 600px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="card">
+      <div class="card2">
+
+        <!-- HEADER -->
+        <div class="header">
+          <div class="header_log">
+            <img src="./assets/theblockchaincoders.png" alt="blockchain" />
+          </div>
+          <div class="header_network" id="header_network">
+            <p id="selected_network">Sepolia <span>▼</span></p>
+          </div>
+        </div>
+
+        <!-- NETWORK SELECTION MODAL -->
+        <div class="network" id="network">
+          <div class="network_title">
+            <h3>Select Network</h3>
+          </div>
+          <div class="network_item">
+            <div>Ethereum Mainnet</div>
+          </div>
+          <div class="network_item">
+            <div>Sepolia</div>
+          </div>
+          <div class="network_item">
+            <div>Goerli</div>
+          </div>
+          <div class="network_item">
+            <div>Rinkeby</div>
+          </div>
+          <div class="network_item">
+            <div>Mumbai</div>
+          </div>
+          <div class="network_item">
+            <div>Polygon</div>
+          </div>
+          <div class="addStyle">
+            <button class="connectWallet" id="add_network">Close</button>
+          </div>
+        </div>
+
+        <!-- LOGIN/SIGNUP SCREEN -->
+        <div class="home_screen_signup" id="LoginUser">
+          <img src="./assets/theblockchaincoders.png" alt="logo" class="home_screen_img" />
+          <h2 class="home_title">Welcome to MianaMask</h2>
+          <p>Connecting you to Ethereum and the Decentralized Web</p>
+          
+          <div class="login_form" id="login_form">
+            <h3>Login to Your Wallet</h3>
+            <input type="email" id="login_email" placeholder="Email" required />
+            <input type="password" id="login_password" placeholder="Password" required />
+            <button class="connectWallet" id="login_up">Login</button>
+          </div>
+
+          <div class="signup_options">
+            <p style="margin: 16px 0 8px 0; color: var(--mm-text-secondary);">Don't have an account?</p>
+            <button class="connectWallet" id="accountCreate" style="margin-bottom: 8px;">Create Account</button>
+            <button class="connectWallet" id="importAccountLogin" style="background: transparent; border: 2px solid var(--mm-orange); color: var(--mm-orange);">Import Account</button>
+          </div>
+        </div>
+
+        <!-- CREATE ACCOUNT SCREEN -->
+        <div class="create_popUp" id="createAccount" style="display: none;">
+          <h2>Create New Account</h2>
+          
+          <div class="field" id="field">
+            <input type="text" id="sign_up_name" placeholder="Full Name" required />
+            <input type="email" id="sign_up_email" placeholder="Email" required />
+            <input type="password" id="sign_up_password" placeholder="Password (min 8 chars)" required />
+            <input type="password" id="sign_up_passwordConfirm" placeholder="Confirm Password" required />
+            <button class="connectWallet" id="sign_up">Create Account</button>
+          </div>
+
+          <div class="center" id="center" style="display: none;">
+            <div class="loader"></div>
+            <p>Creating your wallet...</p>
+          </div>
+
+          <button class="connectWallet back_btn" id="loginAccount">Back to Login</button>
+        </div>
+
+        <!-- ACCOUNT DATA DISPLAY -->
+        <div class="create_popUp" id="accountData" style="display: none;">
+          <h2>Your Wallet is Ready!</h2>
+          <div class="account_info">
+            <h4>Address:</h4>
+            <p id="createAddress"></p>
+            <h4>Private Key:</h4>
+            <p id="createPrivateKey"></p>
+            <h4>Mnemonic Phrase:</h4>
+            <p id="createdMnmonic"></p>
+          </div>
+          <div class="warning">
+            <p>⚠️ Keep your private key and mnemonic phrase safe! Never share them.</p>
+          </div>
+          <button class="connectWallet" id="goHomePage">Continue to Wallet</button>
+        </div>
+
+        <!-- IMPORT ACCOUNT SCREEN -->
+        <div class="import_account" id="import_account" style="display: none;">
+          <div class="import_account_header">
+            <img src="./assets/arrowleft.png" alt="back" id="close_import_account" />
+            <h3>Import Account</h3>
+          </div>
+          <div class="import_account_form">
+            <input type="text" id="add_account_private_key" placeholder="Enter Private Key" />
+            <button class="connectWallet" id="add_New_Account">Import Account</button>
+          </div>
+        </div>
+
+        <!-- MAIN WALLET HOME SCREEN -->
+        <div class="home" id="home" style="display: none;">
+          
+          <!-- Account Info -->
+          <div class="user_info">
+            <div class="user_balance">
+              <p id="accountBalance">0.0 ETH</p>
+            </div>
+            <div class="user_account" id="user_account_dropdown">
+              <div class="account_header" id="account_header">
+                <div class="account_name">
+                  <span id="accountName">Account 1</span>
+                  <span id="userAddress" title="Click to copy">0x0000...0000</span>
+                </div>
+                <span class="dropdown_arrow">▼</span>
+              </div>
+            </div>
+            <div class="accountList" id="accountList" style="display: none;">
+              <!-- Account list will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="home_action">
+            <div class="home_action_item" id="open_Transfer">
+              <img src="./assets/send.png" alt="send" />
+              <p>Send</p>
+            </div>
+            <div class="home_action_item" id="open_Receive">
+              <img src="./assets/import.png" alt="receive" />
+              <p>Receive</p>
+            </div>
+            <div class="home_action_item" id="open_Import">
+              <img src="./assets/swap.png" alt="import" />
+              <p>Swap</p>
+            </div>
+            <div class="home_action_item" id="openAccountImport">
+              <img src="./assets/user.png" alt="user" />
+              <p>Add Account</p>
+            </div>
+          </div>
+
+          <!-- Assets/Activity Toggle -->
+          <div class="assets_activity">
+            <div class="assets_activity_tab">
+              <button class="tab_btn active" id="open_assets">Assets</button>
+              <button class="tab_btn" id="open_activity">Activity</button>
+            </div>
+
+            <!-- Assets Section -->
+            <div class="assets" id="assets">
+              <div class="assets_item">
+                <img src="./assets/theblockchaincoders.png" alt="ETH" class="assets_item_img" />
+                <span>Ethereum</span>
+                <span>ETH</span>
+              </div>
+              <!-- More tokens will be populated by JavaScript -->
+            </div>
+
+            <!-- Activity Section -->
+            <div class="activity" id="activity" style="display: none;">
+              <div class="activity_item">
+                <p>Recent transactions will appear here</p>
+              </div>
+              <div id="link" style="display: none;">
+                <a href="#" target="_blank">View on Etherscan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECEIVE SCREEN -->
+        <div class="receive_screen" id="receive_screen" style="display: none;">
+          <div class="receive_header">
+            <img src="./assets/arrowleft.png" alt="back" id="receive_goback" />
+            <h3>Receive Crypto</h3>
+          </div>
+          
+          <div class="receive_content">
+            <div class="receive_qr">
+              <div class="qr_placeholder">
+                <p>QR Code</p>
+                <div id="qrcode"></div>
+              </div>
+            </div>
+            
+            <div class="receive_address">
+              <h4>Your Wallet Address</h4>
+              <div class="address_container">
+                <p id="receive_address_text">0x0000...0000</p>
+                <button class="copy_btn" id="copy_receive_address">Copy</button>
+              </div>
+              <p class="receive_note">Send only Ethereum (ETH) and ERC-20 tokens to this address.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SWAP SCREEN (Coming Soon) -->
+        <div class="swap_screen" id="swap_screen" style="display: none;">
+          <div class="swap_header">
+            <img src="./assets/arrowleft.png" alt="back" id="swap_goback" />
+            <h3>Swap Tokens</h3>
+          </div>
+          
+          <div class="swap_content">
+            <div class="coming_soon_container">
+              <div class="coming_soon_icon">🔄</div>
+              <h4>Swap Coming Soon!</h4>
+              <p>Token swapping functionality will be available in the next update.</p>
+              <div class="coming_soon_features">
+                <p>✨ Instant token swaps</p>
+                <p>⚡ Best exchange rates</p>
+                <p>🔒 Secure transactions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRANSFER FUNDS SCREEN -->
+        <div class="transfer_form" id="transfer_from" style="display: none;">
+          <div class="transfer_form_header">
+            <img src="./assets/arrowleft.png" alt="back" id="goback" />
+            <h3>Send Ethereum</h3>
+          </div>
+          
+          <div class="transfer_form_body">
+            <div class="transfer_form_item">
+              <label>To Address:</label>
+              <input type="text" id="address" placeholder="0x..." />
+            </div>
+            
+            <div class="transfer_form_item">
+              <label>Amount (ETH):</label>
+              <input type="number" id="amount" placeholder="0.0" step="0.001" />
+            </div>
+            
+            <button class="connectWallet" id="transferFund">Send Transaction</button>
+          </div>
+
+          <!-- Transfer Loading Center -->
+          <div class="transfer_center" id="transfer_center" style="display: none;">
+            <div class="loader"></div>
+            <p>Processing transaction...</p>
+          </div>
+        </div>
+
+        <!-- IMPORT TOKEN SCREEN -->
+        <div class="import_token" id="import_token" style="display: none;">
+          <div class="import_token_header">
+            <img src="./assets/arrowleft.png" alt="back" id="import_goback" />
+            <h3>Import Token</h3>
+          </div>
+          
+          <div class="import_token_form">
+            <div class="import_token_item">
+              <label>Token Contract Address:</label>
+              <input type="text" id="token_address" placeholder="0x..." />
+            </div>
+            
+            <div class="import_token_item">
+              <label>Token Name:</label>
+              <input type="text" id="token_name" placeholder="Token Name" />
+            </div>
+            
+            <div class="import_token_item">
+              <label>Token Symbol:</label>
+              <input type="text" id="token_symbol" placeholder="TOKEN" />
+            </div>
+            
+            <button class="connectWallet" id="add_new_token">Import Token</button>
+          </div>
+        </div>
+
+        <!-- CREATE POPUP SCREEN -->
+        <div class="create_popUp" id="create_popUp" style="display: none;">
+          <h2>Create New Wallet</h2>
+          <p>This will create a new Ethereum wallet with a unique address and private key.</p>
+          
+          <div class="create_info">
+            <div class="info_item">
+              <img src="./assets/lock.svg" alt="secure" />
+              <p>Your keys are stored locally and encrypted</p>
+            </div>
+            <div class="info_item">
+              <img src="./assets/@.svg" alt="backup" />
+              <p>Always backup your private key and mnemonic</p>
+            </div>
+          </div>
+          
+          <button class="connectWallet" id="openCreate">Create Wallet</button>
+          <button class="connectWallet back_btn" id="goHomePage">Back</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="ethers.js"></script>
+    <script src="popup.js"></script>
+  </body>
 </html>
